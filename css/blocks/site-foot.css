@@ -1,0 +1,25 @@
+/*
+  Site foot: the line at the end of the page that names the legal holder.
+  Faint mono type, a step smaller than the phases line, set to the end
+  edge, above a quiet hairline. Sizes the line through the global <small>
+  rule's --small-size. Sits on the wrapper composition; it sets no layout
+  of its own.
+
+  Custom properties
+  --site-foot-space  default var(--space-s)         block padding above and below the line
+  --site-foot-size   default var(--size-step--2)    type size (global <small> --small-size)
+  --site-foot-color  default var(--color-ink-faint) text colour
+  --site-foot-rule   default var(--color-rule)      the hairline above
+  --site-foot-align  default end                    text alignment
+
+  Exceptions: none.
+*/
+
+.site-foot {
+  padding-block: var(--site-foot-space, var(--space-s));
+  border-block-start: var(--stroke-width) solid var(--site-foot-rule, var(--color-rule));
+  font-family: var(--font-mono);
+  --small-size: var(--site-foot-size, var(--size-step--2));
+  color: var(--site-foot-color, var(--color-ink-faint));
+  text-align: var(--site-foot-align, end);
+}

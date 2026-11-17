@@ -1,0 +1,36 @@
+/*
+  Wordmark: the brush mark and "BestByTest.io" as live text in the display face.
+  The ".io" sits in check-green so the domain is part of what people remember.
+  Sits on the cluster composition (mark and name side by side) and takes
+  the ink block for the bleed. The inlined mark paints with currentColor.
+
+  Custom properties
+  --wordmark-size        default var(--size-step-3)       font size of the name
+  --wordmark-gap         default 0.3em                    gap between mark and name (cluster --gutter)
+  --wordmark-color       default var(--color-ink)         colour of the name
+  --wordmark-mark-size   default 1.5em                    inline size of the mark
+  --wordmark-mark-color  default var(--color-check-green) colour of the mark
+  --wordmark-tld-color   default var(--color-check-green) colour of ".io"
+
+  Exceptions: none.
+*/
+
+.wordmark {
+  --gutter: var(--wordmark-gap, 0.3em);
+  --cluster-vertical-alignment: center;
+  font-family: var(--font-display);
+  font-size: var(--wordmark-size, var(--size-step-3));
+  line-height: 1;
+  color: var(--wordmark-color, var(--color-ink));
+}
+
+.wordmark svg {
+  inline-size: var(--wordmark-mark-size, 1.5em);
+  block-size: auto;
+  aspect-ratio: 1;
+  color: var(--wordmark-mark-color, var(--color-check-green));
+}
+
+.wordmark [data-part='tld'] {
+  color: var(--wordmark-tld-color, var(--color-check-green));
+}

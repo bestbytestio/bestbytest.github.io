@@ -1,0 +1,15 @@
+{
+  "name": "bestbytest-site",
+  "private": true,
+  "type": "module",
+  "description": "Checks for the BestByTest.io one-page site. The site itself has no build step.",
+  "scripts": {
+    "check": "sh tools/check.sh"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "html-validate": "^11.21.1",
+    "jsdom": "^31.0.0",
+    "stylelint": "^17.0.0"
+  }
+}

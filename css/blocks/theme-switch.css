@@ -1,0 +1,80 @@
+/*
+  Theme switch: a sliding on/off switch for dark mode. The button is the
+  track; its knob slides to the inline end when dark mode is on, showing a
+  sun (light) or a moon (dark). js/theme.js reveals it (hidden without
+  JavaScript, where the page follows the OS), keeps aria-checked in step
+  with the scheme, and sets data-theme on <html>. Reduced motion stops the
+  slide (reset.css).
+
+  Its type size is its own, so it keeps its size wherever it sits.
+
+  Parts: [data-part='knob'] holds [data-part='sun'] and [data-part='moon'].
+
+  Custom properties
+  --theme-switch-size       default var(--size-step--1)        type size (sets the em the rest use)
+  --theme-switch-width      default 2.75em                     track length
+  --theme-switch-pad        default 0.15em                     gap between track edge and knob
+  --theme-switch-knob-size  default 1.3em                      knob diameter
+  --theme-switch-bg         default var(--color-paper-shade)   track fill
+  --theme-switch-rule       default var(--color-rule)          track border
+  --theme-switch-knob       default var(--color-paper)         knob fill
+  --theme-switch-icon       default var(--color-ink-muted)     sun or moon colour
+  --theme-switch-offset     default 0                          knob travel (set by the exception)
+  --theme-switch-sun        default block                      sun display
+  --theme-switch-moon       default none                       moon display
+
+  Exceptions:
+  [aria-checked='true']  dark mode on: knob at the end, moon shown, green track.
+*/
+
+.theme-switch {
+  font-size: var(--theme-switch-size, var(--size-step--1));
+  inline-size: var(--theme-switch-width, 2.75em);
+  padding: var(--theme-switch-pad, 0.15em);
+  border: var(--stroke-width) solid var(--theme-switch-rule, var(--color-rule));
+  border-radius: var(--theme-switch-knob-size, 1.3em);
+  background-color: var(--theme-switch-bg, var(--color-paper-shade));
+  cursor: pointer;
+}
+
+.theme-switch [data-part='knob'] {
+  display: block;
+  inline-size: var(--theme-switch-knob-size, 1.3em);
+  block-size: var(--theme-switch-knob-size, 1.3em);
+  padding: 0.22em;
+  border-radius: 50%;
+  background-color: var(--theme-switch-knob, var(--color-paper));
+  color: var(--theme-switch-icon, var(--color-ink-muted));
+  transform: translateX(var(--theme-switch-offset, 0));
+  transition: transform var(--transition-base), background-color var(--transition-base);
+}
+
+.theme-switch [data-part='knob'] svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.theme-switch [data-part='sun'] {
+  display: var(--theme-switch-sun, block);
+}
+
+.theme-switch [data-part='moon'] {
+  display: var(--theme-switch-moon, none);
+}
+
+.theme-switch:hover {
+  --theme-switch-rule: var(--color-ink-muted);
+}
+
+.theme-switch[aria-checked='true'] {
+  --theme-switch-offset: calc(
+    var(--theme-switch-width, 2.75em) - 2 * var(--theme-switch-pad, 0.15em)
+    - 2 * var(--stroke-width) - var(--theme-switch-knob-size, 1.3em)
+  );
+  --theme-switch-bg: var(--color-tint);
+  --theme-switch-rule: var(--color-check-green);
+  --theme-switch-knob: var(--color-check-green);
+  --theme-switch-icon: var(--color-on-check-green);
+  --theme-switch-sun: none;
+  --theme-switch-moon: block;
+}

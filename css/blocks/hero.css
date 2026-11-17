@@ -1,0 +1,41 @@
+/*
+  Hero: the opening section. Configures the region and flow compositions it
+  sits on for a looser, editorial rhythm; it sets no layout of its own.
+
+  Custom properties
+  --hero-space       default var(--space-2xl-3xl)  block padding (region)
+  --hero-flow-space  default var(--space-l-xl)     gap between wordmark, headline and line (flow)
+
+  --hero-mark-bg     default var(--color-highlight)     background of the highlighted phrase (<mark>)
+  --hero-mark-color  default var(--color-on-highlight)  text colour of the highlighted phrase
+
+  --hero-lede-rule   default var(--color-check-green)   colour of the rule beside the supporting line
+  --hero-lede-size   default var(--size-step-1)         type size of the supporting line
+
+  Parts: [data-part='lede'] is the supporting line, set as a pull-quote. It is a
+  plain <p>, not a <blockquote>: the words are not quoted from a source.
+
+  Exceptions: none.
+*/
+
+.hero {
+  --region-space: var(--hero-space, var(--space-2xl-3xl));
+  --flow-space: var(--hero-flow-space, var(--space-l-xl));
+}
+
+.hero mark {
+  background-color: var(--hero-mark-bg, var(--color-highlight));
+  color: var(--hero-mark-color, var(--color-on-highlight));
+  padding-inline: 0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.hero [data-part='lede'] {
+  border-inline-start: 0.25em solid var(--hero-lede-rule, var(--color-check-green));
+  padding-inline-start: var(--space-s);
+  font-size: var(--hero-lede-size, var(--size-step-1));
+  font-style: italic;
+  line-height: var(--leading-body);
+  max-inline-size: 40ch;
+}

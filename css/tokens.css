@@ -1,0 +1,161 @@
+/*
+  Design tokens. The only file that holds literal colours and sizes.
+
+  Raw      --palette-*, --size-step-*, --space-*  (values)
+  Semantic --color-*, --font-*, --gutter, --stroke, --measure, --radius-*, --flow-space  (intent)
+  Blocks   --<block>-*  (component API, in blocks/*.css)
+
+  Colour roles use light-dark(): light is ink on warm paper; dark is the
+  inverse (chalk on night). The scheme follows the OS, and
+  [data-theme="light" | "dark"] on <html> pins it (js/theme.js sets it from
+  the theme switch). --color-ink-faint is the quietest text that
+  still passes AA (fine print); --color-rule is a quiet hairline; --color-tint a pale
+  green panel. Both match the research report's tokens.
+  `node site/tools/contrast.mjs` checks every role pair in both schemes.
+
+  Fluid scales: Utopia method, 320px to 1280px viewport.
+  Type 17px at ratio 1.2 to 20px at ratio 1.25.
+*/
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('../fonts/libre-baskerville-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../fonts/ibm-plex-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* Raw palette: light scheme */
+  --palette-ink: #1c1e19;
+  --palette-ink-muted: #55524a;
+  --palette-ink-faint: #6d6a61;
+  --palette-paper: #f6f1e6;
+  --palette-paper-shade: #ebe3d2;
+  --palette-green: #2c6a3a;
+  --palette-vermilion: #a33a22;
+  --palette-signal: #d9543a;
+  --palette-ochre: #7f5300;
+  --palette-crimson: #9b1c2c;
+  --palette-rule: #cdc3ad;
+  --palette-green-tint: #dee6d3;
+
+  /* Raw palette: dark scheme */
+  --palette-chalk: #ede7da;
+  --palette-chalk-muted: #b3ad9f;
+  --palette-chalk-faint: #8c887c;
+  --palette-night: #171914;
+  --palette-night-shade: #23261f;
+  --palette-green-light: #82c493;
+  --palette-vermilion-light: #ec9479;
+  --palette-ochre-light: #e0b25a;
+  --palette-crimson-light: #f08a7f;
+  --palette-night-rule: #3c3f36;
+  --palette-night-tint: #1f2c22;
+
+  /* Colour roles */
+  --color-ink: light-dark(var(--palette-ink), var(--palette-chalk));
+  --color-ink-muted: light-dark(var(--palette-ink-muted), var(--palette-chalk-muted));
+  --color-ink-faint: light-dark(var(--palette-ink-faint), var(--palette-chalk-faint));
+  --color-paper: light-dark(var(--palette-paper), var(--palette-night));
+  --color-paper-shade: light-dark(var(--palette-paper-shade), var(--palette-night-shade));
+  --color-check-green: light-dark(var(--palette-green), var(--palette-green-light));
+  --color-on-check-green: light-dark(var(--palette-paper), var(--palette-night));
+  --color-accent: light-dark(var(--palette-vermilion), var(--palette-vermilion-light));
+  --color-success: light-dark(var(--palette-green), var(--palette-green-light));
+  --color-warning: light-dark(var(--palette-ochre), var(--palette-ochre-light));
+  --color-danger: light-dark(var(--palette-crimson), var(--palette-crimson-light));
+  --color-focus: light-dark(var(--palette-vermilion), var(--palette-vermilion-light));
+  --color-highlight: light-dark(var(--palette-signal), var(--palette-vermilion-light));
+  --color-on-highlight: light-dark(var(--palette-ink), var(--palette-night));
+  --color-rule: light-dark(var(--palette-rule), var(--palette-night-rule));
+  --color-tint: light-dark(var(--palette-green-tint), var(--palette-night-tint));
+
+  /* Fluid type scale */
+  --size-step--2: clamp(0.7378rem, 0.7171rem + 0.1036vw, 0.8rem);
+  --size-step--1: clamp(0.8854rem, 0.8472rem + 0.191vw, 1rem);
+  --size-step-0: clamp(1.0625rem, 1rem + 0.3125vw, 1.25rem);
+  --size-step-1: clamp(1.275rem, 1.1792rem + 0.4792vw, 1.5625rem);
+  --size-step-2: clamp(1.53rem, 1.389rem + 0.7052vw, 1.9531rem);
+  --size-step-3: clamp(1.836rem, 1.6342rem + 1.009vw, 2.4414rem);
+  --size-step-4: clamp(2.2032rem, 1.9203rem + 1.4143vw, 3.0518rem);
+  --size-step-5: clamp(2.6438rem, 2.2536rem + 1.9514vw, 3.8147rem);
+
+  /* Fluid space scale */
+  --space-3xs: clamp(0.2656rem, 0.25rem + 0.0781vw, 0.3125rem);
+  --space-2xs: clamp(0.5313rem, 0.5rem + 0.1563vw, 0.625rem);
+  --space-xs: clamp(0.7969rem, 0.75rem + 0.2344vw, 0.9375rem);
+  --space-s: clamp(1.0625rem, 1rem + 0.3125vw, 1.25rem);
+  --space-m: clamp(1.5938rem, 1.5rem + 0.4688vw, 1.875rem);
+  --space-l: clamp(2.125rem, 2rem + 0.625vw, 2.5rem);
+  --space-xl: clamp(3.1875rem, 3rem + 0.9375vw, 3.75rem);
+  --space-2xl: clamp(4.25rem, 4rem + 1.25vw, 5rem);
+  --space-3xl: clamp(6.375rem, 6rem + 1.875vw, 7.5rem);
+  --space-s-m: clamp(1.0625rem, 0.7917rem + 1.3542vw, 1.875rem);
+  --space-m-l: clamp(1.5938rem, 1.2917rem + 1.5104vw, 2.5rem);
+  --space-l-xl: clamp(2.125rem, 1.5833rem + 2.7083vw, 3.75rem);
+  --space-xl-2xl: clamp(3.1875rem, 2.5833rem + 3.0208vw, 5rem);
+  --space-2xl-3xl: clamp(4.25rem, 3.1667rem + 5.4167vw, 7.5rem);
+  --space-s-l: clamp(1.0625rem, 0.5833rem + 2.3958vw, 2.5rem);
+
+  /* Font roles */
+  --font-display: 'Libre Baskerville', Baskerville, 'Times New Roman', serif;
+  --font-text: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  /* Semantic */
+  --gutter: var(--space-s-m);
+  --flow-space: var(--space-s);
+  --measure: 65ch;
+  --page-min-size: 300px; /* narrowest page; below it the page scrolls sideways */
+  --leading-tight: 1.15;
+  --leading-body: 1.55;
+  --stroke-width: 1px;
+  --stroke: var(--stroke-width) solid var(--color-ink);
+  --focus-width: 3px;
+  --radius-s: 0.25rem;
+  --radius-m: 0.5rem;
+  --transition-base: 200ms ease;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}

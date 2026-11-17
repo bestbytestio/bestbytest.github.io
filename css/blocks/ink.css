@@ -1,0 +1,59 @@
+/*
+  Ink: ink-on-paper treatment for display type and the mark, and a paper
+  grain for surfaces. Use on headings and the mark only (filters cost paint
+  time; R6), never on body text.
+
+  The filter lives in svg/ink.svg. External references such as
+  url(../../svg/ink.svg#ink-bleed) are unreliable across browsers, so each
+  page inlines that <svg> once (Step 3) and this block refers to the
+  filter by fragment.
+
+  .ink    applies the ink filter.
+  .paper  lays grain over the surface's own background colour.
+
+  Custom properties
+  --ink-filter  default url(#ink-bleed)            the filter on .ink
+  --ink-paper   default url(../../svg/paper.svg)   the grain on .paper
+
+  Exceptions:
+  [data-ink='off']  on the element or any ancestor: no filter, no grain.
+  [data-ink='on'] is the default and needs no rule.
+
+  The filter and grain are also off under prefers-reduced-motion: reduce
+  and forced-colors: active, and text reads the same without them. Those
+  contexts set `filter: none` as well as the custom property, so a user
+  preference wins even where an author reassigns --ink-filter.
+*/
+
+.ink {
+  filter: var(--ink-filter, url(#ink-bleed));
+}
+
+.paper {
+  background-image: var(--ink-paper, url('../../svg/paper.svg'));
+}
+
+[data-ink='off'],
+[data-ink='off'] .ink {
+  --ink-filter: none;
+  --ink-paper: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink,
+  .paper {
+    --ink-filter: none;
+    --ink-paper: none;
+    filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .ink,
+  .paper {
+    --ink-filter: none;
+    --ink-paper: none;
+    filter: none;
+  }
+}

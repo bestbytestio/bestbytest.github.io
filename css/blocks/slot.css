@@ -1,0 +1,19 @@
+/*
+  Slot: a visible placeholder for copy only Dean writes (the headline, the
+  pitch, any sentence a buyer reads as the offer). Marked with data-slot so
+  that deleting the attribute, once the words are in, returns the element
+  to its global styles. The hint for each slot is in an HTML comment beside it.
+
+  Custom properties
+  --slot-color   default var(--color-accent)  text and rule colour
+  --slot-rule    default calc(var(--stroke-width) * 2)  width of the margin rule
+  --slot-indent  default 0.5em                gap between rule and text
+
+  Exceptions: none.
+*/
+
+[data-slot] {
+  color: var(--slot-color, var(--color-accent));
+  border-inline-start: var(--slot-rule, calc(var(--stroke-width) * 2)) dashed currentColor;
+  padding-inline-start: var(--slot-indent, 0.5em);
+}

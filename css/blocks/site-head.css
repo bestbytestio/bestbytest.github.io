@@ -1,0 +1,27 @@
+/*
+  Site head: the bar at the top of the page, on the bar composition: the
+  wordmark and the contact links ([data-part='contact']) in the start
+  group, the theme switch alone in the end group. When the links no longer
+  fit beside the wordmark they move beneath it as a whole, so the wordmark
+  and switch always share the top line. Sets the bar's line size to the
+  wordmark's height (its mark is 1.5em of --wordmark-size), so the switch
+  centres on the wordmark. Tightens the space between wrapped rows of links
+  (the cluster's row gap). Sets the cluster alignment on itself (the
+  links' cluster inherits it); it sets no layout of its own. It also sizes
+  the wordmark for the bar through the wordmark's API.
+
+  Custom properties
+  --site-head-space  default var(--space-s)       block padding above and below the links
+  --site-head-size   default var(--size-step--1)  type size of the links
+
+  Exceptions: none.
+*/
+
+.site-head {
+  padding-block: var(--site-head-space, var(--space-s));
+  font-size: var(--site-head-size, var(--size-step--1));
+  --cluster-horizontal-alignment: flex-start;
+  --wordmark-size: var(--size-step-1);
+  --cluster-row-gap: var(--space-3xs);
+  --bar-line-size: calc(1.5 * var(--size-step-1));
+}

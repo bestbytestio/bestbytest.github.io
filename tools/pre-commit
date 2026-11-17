@@ -1,0 +1,12 @@
+#!/bin/sh
+# Git pre-commit hook: runs the site checks when a staged file is under site/.
+# Install once, from the repository root:
+#   ln -s ../../site/tools/pre-commit .git/hooks/pre-commit
+# The checks read the working tree, so stage everything you mean to commit.
+if git diff --cached --name-only | grep -q '^site/'; then
+  echo 'Site files staged: running site checks.'
+  sh site/tools/check.sh || {
+    echo 'Site checks failed; commit stopped. Fix the problems, or commit with --no-verify only if you mean to.' >&2
+    exit 1
+  }
+fi

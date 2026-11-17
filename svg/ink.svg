@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false">
+  <!--
+    Ink treatment filters. Canonical source: pages inline this <svg> once
+    (CSS filter: url(file.svg#id) is unreliable across browsers), and
+    css/blocks/ink.css refers to the filters as url(#ink-bleed).
+
+    ink-bleed: ragged ink edges for display type and the mark. Low-frequency
+    noise displaces the glyph edges by under 1 user unit (CSS px on HTML
+    text), enough to read as ink on paper while text stays legible.
+  -->
+  <defs>
+    <filter id="ink-bleed" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="ragged"/>
+      <feGaussianBlur in="ragged" stdDeviation="0.15"/>
+    </filter>
+  </defs>
+</svg>

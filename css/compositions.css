@@ -1,0 +1,101 @@
+/*
+  Layout compositions (Every Layout). Each does one thing; blocks configure
+  them through the custom properties below and never set their own margin
+  or width. Only the compositions the page needs.
+*/
+
+/* flow: vertical rhythm. --flow-space */
+.flow > * + * {
+  margin-block-start: var(--flow-space, 1em);
+}
+
+/* wrapper: max-width centred container. --wrapper-max-width, --gutter */
+.wrapper {
+  max-inline-size: var(--wrapper-max-width, 85rem);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+}
+
+/* center: centres its children on the measure. --center-max-width */
+.center {
+  box-sizing: content-box;
+  max-inline-size: var(--center-max-width, var(--measure));
+  margin-inline: auto;
+}
+
+/* cluster: horizontal wrapping group. --cluster-row-gap sets the space
+   between wrapped rows (default: the same as --gutter).
+   --gutter, --cluster-row-gap, --cluster-horizontal-alignment,
+   --cluster-vertical-alignment */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cluster-row-gap, var(--gutter, var(--space-m))) var(--gutter, var(--space-m));
+  justify-content: var(--cluster-horizontal-alignment, flex-start);
+  align-items: var(--cluster-vertical-alignment, center);
+}
+
+/* switcher: row until the container is narrower than the target, then a stack.
+   --gutter, --switcher-target-container-width, --switcher-vertical-alignment */
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-l));
+  align-items: var(--switcher-vertical-alignment, flex-start);
+}
+
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--switcher-target-container-width, 40rem) - 100%) * 999);
+}
+
+.switcher > :nth-child(n + 3) {
+  flex-basis: 100%;
+}
+
+/* region: vertical section spacing. --region-space */
+.region {
+  padding-block: var(--region-space, var(--space-xl-2xl));
+  position: relative;
+}
+
+/* with-icon: an icon beside its label, both on the text baseline.
+   --with-icon-space. Sits inside an <a> so the link keeps its global styles;
+   text-decoration is passed down because a flex box does not inherit the
+   link's underline. */
+.with-icon {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--with-icon-space, 0.4em);
+  text-decoration: inherit;
+}
+
+/* bar: two groups on one row, the first filling the space and the second
+   held at the inline end. Each group lays its items in a wrapping row; an
+   item keeps its one-line size until it is alone on a line, so an item
+   that no longer fits moves beneath as a whole before its own contents
+   wrap (the flex default, basis auto). So the
+   end group always shares the first line with the start of the first group.
+   No breakpoint: the content decides.
+   --bar-line-size sets the least block size of each group's first line, so
+   items of different heights in the two groups centre on the same line
+   (set it to the tallest item's size).
+   --bar-gap, --bar-vertical-alignment, --bar-line-size */
+.bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: var(--bar-gap, var(--gutter, var(--space-s)));
+}
+
+.bar > * {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: var(--bar-vertical-alignment, center);
+  gap: var(--bar-gap, var(--gutter, var(--space-s)));
+}
+
+.bar > :last-child {
+  min-block-size: var(--bar-line-size, auto);
+}

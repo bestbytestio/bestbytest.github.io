@@ -1,0 +1,32 @@
+/*
+  Button: a call-to-action link drawn as a filled block. Use on <a> or <button>.
+
+  Custom properties
+  --button-bg       default var(--color-check-green)     fill
+  --button-color    default var(--color-on-check-green)  text colour
+  --button-padding  default 0.6em 1.2em                  block and inline padding
+  --button-radius   default var(--radius-s)              corner radius
+  --button-size     default var(--size-step-1)           type size
+
+  Exceptions: none. Hover and active use filter, so they work with any fill.
+*/
+
+.button {
+  display: inline-block;
+  padding: var(--button-padding, 0.6em 1.2em);
+  border-radius: var(--button-radius, var(--radius-s));
+  background-color: var(--button-bg, var(--color-check-green));
+  color: var(--button-color, var(--color-on-check-green));
+  font-family: var(--font-display);
+  font-size: var(--button-size, var(--size-step-1));
+  line-height: var(--leading-tight);
+  text-decoration: none;
+}
+
+.button:hover {
+  filter: brightness(1.12);
+}
+
+.button:active {
+  filter: brightness(0.92);
+}

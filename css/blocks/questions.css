@@ -1,0 +1,28 @@
+/*
+  Questions: a description list of questions a buyer asks, each followed by
+  its answer. Sits on the flow composition; sets only the rhythm between a
+  question and its answer, and the question's face.
+
+  Custom properties
+  --questions-gap          default var(--space-s-m)    space before each question (flow)
+  --questions-answer-gap   default var(--space-3xs)    space between a question and its answer (flow)
+  --questions-q-color      default var(--color-accent) question colour (red, matching the hero highlight)
+  --questions-a-color      default var(--color-ink)    answer colour
+
+  Exceptions: none.
+*/
+
+.questions > dt {
+  --flow-space: var(--questions-gap, var(--space-s-m));
+  font-family: var(--font-display);
+  font-size: var(--size-step-1);
+  line-height: 1.25;
+  color: var(--questions-q-color, var(--color-accent));
+}
+
+.questions > dd {
+  --flow-space: var(--questions-answer-gap, var(--space-3xs));
+  margin-inline: 0;
+  max-inline-size: var(--measure);
+  color: var(--questions-a-color, var(--color-ink));
+}

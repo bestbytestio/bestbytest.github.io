@@ -1,0 +1,102 @@
+/*
+  Global styles: the cascade does most of the work.
+  Element rules target :not([class]) so blocks never fight them.
+*/
+
+html {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-text);
+  font-size: var(--size-step-0);
+  line-height: var(--leading-body);
+  accent-color: var(--color-check-green);
+}
+
+body {
+  background-color: var(--color-paper);
+  min-inline-size: var(--page-min-size);
+}
+
+:is(h1, h2, h3, h4):not([class]) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  text-wrap: balance;
+}
+
+h1:not([class]) {
+  font-size: var(--size-step-5);
+  max-inline-size: 20ch;
+}
+
+h2:not([class]) {
+  font-size: var(--size-step-3);
+  max-inline-size: 35ch;
+}
+
+/* Sub-headings share the face and the spacing of the questions block's
+   questions: more space above, and the next element close beneath. */
+h3:not([class]) {
+  --flow-space: var(--space-s-m);
+  font-size: var(--size-step-1);
+  color: var(--color-accent);
+  max-inline-size: 35ch;
+}
+
+h3:not([class]) + * {
+  --flow-space: var(--space-3xs);
+}
+
+h4:not([class]) {
+  font-size: var(--size-step-1);
+  max-inline-size: 35ch;
+}
+
+:is(p, li, dd, blockquote, figcaption):not([class]) {
+  max-inline-size: var(--measure);
+  text-wrap: pretty;
+}
+
+small:not([class]) {
+  font-size: var(--small-size, var(--size-step--1));
+}
+
+strong:not([class]),
+b:not([class]) {
+  font-weight: 600;
+}
+
+a:not([class]) {
+  color: var(--color-check-green);
+  text-decoration-thickness: max(var(--stroke-width), 0.08em);
+  text-underline-offset: 0.2em;
+}
+
+a:not([class]):hover {
+  text-decoration-thickness: 0.15em;
+}
+
+:is(code, kbd, samp, pre):not([class]) {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+hr:not([class]) {
+  border: none;
+  border-block-start: var(--hr-stroke, var(--stroke));
+  margin-block: var(--flow-space, var(--space-l));
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 0.15em;
+}
+
+:target {
+  scroll-margin-block: var(--space-l);
+}
+
+::selection {
+  background-color: var(--color-check-green);
+  color: var(--color-on-check-green);
+}

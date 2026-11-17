@@ -1,0 +1,35 @@
+/*
+  Phases: an ordered list of engagement phases read as one line of test
+  output (01 Discovery → 02 Assessment → …). Sits on the cluster
+  composition; use role="list" so the list keeps its semantics.
+
+  Custom properties
+  --phases-gap           default var(--space-s)                   gap between phases (cluster --gutter)
+  --phases-row-gap       default var(--space-2xs)                 gap between wrapped rows (cluster --cluster-row-gap)
+  --phases-color         default var(--color-ink-muted)           phase names and arrows
+  --phases-number-color  default var(--color-check-green)         the step numbers
+
+  Exceptions: none.
+*/
+
+.phases {
+  --gutter: var(--phases-gap, var(--space-s));
+  --cluster-row-gap: var(--phases-row-gap, var(--space-2xs));
+  font-family: var(--font-mono);
+  font-size: var(--size-step--1);
+  color: var(--phases-color, var(--color-ink-muted));
+  counter-reset: phase;
+}
+
+.phases > li {
+  counter-increment: phase;
+}
+
+.phases > li::before {
+  content: counter(phase, decimal-leading-zero) '\00a0';
+  color: var(--phases-number-color, var(--color-check-green));
+}
+
+.phases > li:not(:last-child)::after {
+  content: '\00a0\2192' / '';
+}

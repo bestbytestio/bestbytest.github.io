@@ -1,0 +1,36 @@
+/* Single-purpose utilities. :where() keeps specificity at zero. */
+
+:where(.visually-hidden:not(:focus, :active, :focus-within)) {
+  clip-path: inset(50%);
+  /* stylelint-disable-next-line declaration-property-unit-disallowed-list -- a fixed 1px box */
+  block-size: 1px;
+  /* stylelint-disable-next-line declaration-property-unit-disallowed-list -- a fixed 1px box */
+  inline-size: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+:where(.text-step--1) { font-size: var(--size-step--1); }
+:where(.text-step-0) { font-size: var(--size-step-0); }
+:where(.text-step-1) { font-size: var(--size-step-1); }
+:where(.text-step-2) { font-size: var(--size-step-2); }
+:where(.text-step-3) { font-size: var(--size-step-3); }
+:where(.text-step-4) { font-size: var(--size-step-4); }
+:where(.text-step-5) { font-size: var(--size-step-5); }
+
+:where(.font-display) { font-family: var(--font-display); }
+:where(.font-mono) { font-family: var(--font-mono); }
+
+:where(.color-ink) { color: var(--color-ink); }
+:where(.color-ink-muted) { color: var(--color-ink-muted); }
+:where(.color-check-green) { color: var(--color-check-green); }
+:where(.color-accent) { color: var(--color-accent); }
+
+:where(.bg-paper) { background-color: var(--color-paper); }
+:where(.bg-paper-shade) { background-color: var(--color-paper-shade); }
+
+:where(.measure) { max-inline-size: var(--measure); }
+
+/* Keep a short run (e.g. a telephone number) on one line. */
+:where(.nowrap) { white-space: nowrap; }

@@ -1,0 +1,19 @@
+/* Entry stylesheet. Layer order is fixed here; later layers win. */
+@layer reset, globals, compositions, utilities, blocks, exceptions;
+
+@import url('tokens.css');
+@import url('reset.css') layer(reset);
+@import url('globals.css') layer(globals);
+@import url('compositions.css') layer(compositions);
+@import url('utilities.css') layer(utilities);
+@import url('blocks/ink.css') layer(blocks);
+@import url('blocks/hero.css') layer(blocks);
+@import url('blocks/wordmark.css') layer(blocks);
+@import url('blocks/slot.css') layer(blocks);
+@import url('blocks/phases.css') layer(blocks);
+@import url('blocks/questions.css') layer(blocks);
+@import url('blocks/site-head.css') layer(blocks);
+@import url('blocks/site-foot.css') layer(blocks);
+@import url('blocks/button.css') layer(blocks);
+@import url('blocks/icon.css') layer(blocks);
+@import url('blocks/theme-switch.css') layer(blocks);

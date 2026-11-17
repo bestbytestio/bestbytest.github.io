@@ -1,0 +1,19 @@
+/*
+  Icon: a small SVG in currentColor, sized to the cap height so it sits on
+  the baseline. It owns no external spacing: pair it with its label inside
+  the with-icon composition. Mark the SVG aria-hidden; the label carries the
+  meaning.
+
+  Custom properties
+  --icon-size   default 1cap (0.75em where cap is unsupported)  block size
+
+  Exceptions: none.
+*/
+
+.icon {
+  display: inline;
+  vertical-align: baseline;
+  block-size: 0.75em;
+  block-size: var(--icon-size, 1cap);
+  inline-size: auto;
+}
